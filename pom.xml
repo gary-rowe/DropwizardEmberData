@@ -1,0 +1,178 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>uk.co.froot.demo</groupId>
+  <artifactId>dedd</artifactId>
+  <version>1.0.0</version>
+
+  <url>http://localhost:8080</url>
+
+  <name>Dropwizard Ember Data Demo</name>
+  <description>A demo using Dropwizard and Ember Data to present a simple blog</description>
+  <inceptionYear>2013</inceptionYear>
+
+  <!-- Set the version levels for linked dependencies -->
+  <properties>
+    <dropwizard.version>0.6.2</dropwizard.version>
+  </properties>
+
+  <build>
+
+    <plugins>
+
+      <!-- Resources plugin to copy the Ember build contents into the target for packaging -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/assets/ember</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/main/ember/build</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- All compilation is done under Java6 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <debug>true</debug>
+        </configuration>
+      </plugin>
+
+      <!-- Shade plugin is required to make a "slim" JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>1.6</version>
+        <configuration>
+          <createDependencyReducedPom>true</createDependencyReducedPom>
+          <filters>
+            <filter>
+              <artifact>*:*</artifact>
+              <excludes>
+                <exclude>META-INF/*.SF</exclude>
+                <exclude>META-INF/*.DSA</exclude>
+                <exclude>META-INF/*.RSA</exclude>
+              </excludes>
+            </filter>
+          </filters>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>uk.co.froot.demo.ember.AppService</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+
+    <!-- Dropwizard framework -->
+    <!-- Core functionality -->
+    <dependency>
+      <groupId>com.yammer.dropwizard</groupId>
+      <artifactId>dropwizard-core</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+    <!-- Authentication support -->
+    <dependency>
+      <groupId>com.yammer.dropwizard</groupId>
+      <artifactId>dropwizard-auth</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+
+    <!-- REST client support for upstream data -->
+    <dependency>
+      <groupId>com.yammer.dropwizard</groupId>
+      <artifactId>dropwizard-client</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+
+    <!-- Dropwizard Guice for Jersey-friendly dependency injection -->
+    <dependency>
+      <groupId>com.hubspot.dropwizard</groupId>
+      <artifactId>dropwizard-guice</artifactId>
+      <version>0.6.1.6</version>
+    </dependency>
+
+    <!-- OpenID heavy lifting -->
+    <dependency>
+      <groupId>org.openid4java</groupId>
+      <artifactId>openid4java</artifactId>
+      <version>0.9.7</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>guice</artifactId>
+          <groupId>com.google.inject</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Guice -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>3.0</version>
+    </dependency>
+
+    <!-- TEST DEPENDENCIES -->
+
+    <!-- Standard unit testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Provides fake data for domain objects -->
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>0.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Resource testing support -->
+    <dependency>
+      <groupId>com.yammer.dropwizard</groupId>
+      <artifactId>dropwizard-testing</artifactId>
+      <version>${dropwizard.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+</project>

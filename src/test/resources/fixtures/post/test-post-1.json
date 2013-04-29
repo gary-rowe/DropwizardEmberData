@@ -1,0 +1,21 @@
+{
+  "post": {
+    "id": 1,
+    "title": "Post 1",
+    "body" : "# Post 1 heading\\n\\n[A link to some other article](http://gary-rowe.com)",
+    "comment_ids": [1, 2, 3]
+  },
+
+  "comments": [{
+    "id": 1,
+    "body": "First!"
+  },
+  {
+    "id": 2,
+    "body": "Interesting article"
+  },
+  {
+    "id": 3,
+    "body": "Good link to check out"
+  }]
+}

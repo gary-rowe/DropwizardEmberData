@@ -1,4 +1,4 @@
-# Dropwizard Ember Data
+# Dropwizard Ember Data Demo (DEDD)
 
 A robust demonstrator of [Ember Data](https://github.com/emberjs/data) against a [Dropwizard](http://dropwizard.codahale.com) RESTful API.
 
@@ -163,3 +163,7 @@ All the magic happens in `app.js` take a look at the comments and you'll see how
 
 For a much bigger scale application involving a [Maven](http://maven.apache.org)-built [Dropwizard](http://dropwizard.codahale.com) back end combined
 with a [Grunt.js](http://gruntjs.com)-built front end see my other public repos (TODO).
+
+# Where does the ASCII art for the banner come from?
+
+I used the excellent [TAAG site](http://patorjk.com/software/taag).

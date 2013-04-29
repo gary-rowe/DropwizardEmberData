@@ -1,0 +1,52 @@
+{
+  "posts":[
+    {
+      "post":{
+        "id":1,
+        "title":"Post 1",
+        "body":"# Post 1 heading\\n\\n[A link to some other article](http://gary-rowe.com)",
+        "comment_ids":[1, 2, 3]
+      },
+
+      "comments":[
+        {
+          "id":1,
+          "body":"First!"
+        },
+        {
+          "id":2,
+          "body":"Interesting article"
+        },
+        {
+          "id":3,
+          "body":"Good link to check out"
+        }
+      ]
+    },
+    {
+      "post":{
+        "id":2,
+        "title":"Post 2",
+        "body":"# Post 2 heading\\n\\n[A link to some other article](http://gary-rowe.com)",
+        "comment_ids":[4, 5, 6]
+      },
+
+      "comments":[
+        {
+          "id":4,
+          "body":"First again!"
+        },
+        {
+          "id":5,
+          "body":"Another interesting article"
+        },
+        {
+          "id":6,
+          "body":"Wow - they just keep on coming"
+        }
+      ]
+    }
+
+  ]
+
+}
