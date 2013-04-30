@@ -6,6 +6,7 @@ import com.sun.jersey.core.spi.component.ComponentScope;
 import com.sun.jersey.spi.inject.Injectable;
 import com.sun.jersey.spi.inject.InjectableProvider;
 import com.yammer.dropwizard.auth.Authenticator;
+import org.junit.Ignore;
 import uk.co.froot.demo.ember.auth.annotation.RestrictedTo;
 
 /**
@@ -16,6 +17,7 @@ import uk.co.froot.demo.ember.auth.annotation.RestrictedTo;
  *
  * @since 0.0.1
  */
+@Ignore
 public class TestRestrictedToProvider implements InjectableProvider<RestrictedTo, Parameter> {
 
   private final Authenticator authenticator;

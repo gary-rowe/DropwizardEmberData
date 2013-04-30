@@ -11,6 +11,7 @@ import uk.co.froot.demo.ember.resources.PostResource;
 import uk.co.froot.testing.AuthEveryoneAsAdminAuthenticator;
 import uk.co.froot.testing.TestRestrictedToProvider;
 
+import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class PostResourceTest extends ResourceTest {
@@ -21,6 +22,8 @@ public class PostResourceTest extends ResourceTest {
   protected void setUpResources() throws Exception {
     addProvider(new TestRestrictedToProvider(new AuthEveryoneAsAdminAuthenticator()));
     addResource(new PostResource(postReadService));
+
+    when(postReadService.all()).thenReturn(new PostList());
   }
 
   @After
@@ -38,12 +41,14 @@ public class PostResourceTest extends ResourceTest {
     int expectedPageSize = 10;
 
     // Act
-    client()
+    PostList postList = client()
       .resource("/posts")
       .queryParam("page", "0").queryParam("pageSize", "10")
       .get(PostList.class);
 
     // Assert
+    assertThat(postList).isNotNull();
+
     verify(postReadService, times(1)).all();
     verifyNoMoreInteractions(postReadService);
   }

@@ -1,7 +1,9 @@
 package uk.co.froot.demo.ember.api.blog;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * <p>Wrapper to provide the following to API:</p>
@@ -12,11 +14,8 @@ import org.slf4j.LoggerFactory;
  */
 public class PostList {
 
-  /**
-   * Provides logging for this class
-   */
-  private static final Logger log = LoggerFactory.getLogger(PostList.class);
-
+  @JsonProperty
+  private List<Post> posts = Lists.newArrayList();
 
 
 }

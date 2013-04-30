@@ -26,8 +26,10 @@ import uk.co.froot.demo.ember.api.security.Authority;
 import uk.co.froot.demo.ember.api.security.User;
 import uk.co.froot.demo.ember.auth.InMemoryUserCache;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
@@ -75,6 +77,7 @@ public class OpenIDResource extends BaseResource {
    */
   @POST
   public Response authenticationRequest(
+    @Context HttpServletRequest request,
     @FormParam("identifier")
     String identifier
   ) {
@@ -156,7 +159,9 @@ public class OpenIDResource extends BaseResource {
    */
   @GET
   @Path("/verify")
-  public Response verifyOpenIdServerResponse() {
+  public Response verifyOpenIdServerResponse(
+    @Context HttpServletRequest request
+    ) {
 
     try {
       // Retrieve the previously stored discovery information

@@ -1,6 +1,5 @@
 package uk.co.froot.demo.ember.resources;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.UriInfo;
@@ -17,8 +16,6 @@ import java.util.Locale;
  */
 public abstract class BaseResource {
 
-  protected static final String OPENID_IDENTIFIER_KEY = "openid-identifier-key";
-
   /**
    * Jersey creates a fresh resource every request so this is safe
    */
@@ -30,12 +27,6 @@ public abstract class BaseResource {
    */
   @Context
   protected HttpHeaders httpHeaders;
-
-  /**
-   * Jersey creates a fresh resource every request so this is safe
-   */
-  @Context
-  protected HttpServletRequest request;
 
   public BaseResource() {
 
