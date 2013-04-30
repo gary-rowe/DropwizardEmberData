@@ -30,10 +30,14 @@ public class PostResourceTest extends ResourceTest {
 
   @Override
   protected void setUpResources() throws Exception {
+
+    // Prepare mocks first
+    when(postReadService.all()).thenReturn(new PostList());
+
+    // Add resources
     addProvider(new TestRestrictedToProvider(new AuthEveryoneAsAdminAuthenticator()));
     addResource(new PostResource(postReadService));
 
-    when(postReadService.all()).thenReturn(new PostList());
   }
 
   @After
@@ -59,8 +63,6 @@ public class PostResourceTest extends ResourceTest {
     // Assert
     assertThat(postList).isNotNull();
 
-    verify(postReadService, times(1)).all();
-    verifyNoMoreInteractions(postReadService);
   }
 
 }
