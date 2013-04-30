@@ -30,7 +30,7 @@ public class PostListTest {
     objectMapperFactory.enable(SerializationFeature.WRAP_ROOT_VALUE);
     ObjectMapper objectMapper = objectMapperFactory.build();
 
-    PostList testObject = objectMapper.readValue(FixtureHelpers.fixture("fixtures/post/test-posts.json"),PostList.class);
+    PostList testObject = objectMapper.readValue(FixtureHelpers.fixture("fixtures/post/test-post-list.json"),PostList.class);
 
     assertThat(testObject.getPosts().size()).isEqualTo(2);
 
@@ -46,7 +46,7 @@ public class PostListTest {
     FixtureAsserts.assertStringMatchesJsonFixture(
       "PostList",
       JsonHelpers.asJson(testObject),
-      "/fixtures/post/test-posts.json");
+      "/fixtures/post/test-post-list.json");
 
   }
 

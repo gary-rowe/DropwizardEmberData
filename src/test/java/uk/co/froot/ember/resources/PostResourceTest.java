@@ -1,15 +1,18 @@
 package uk.co.froot.ember.resources;
 
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.common.base.Optional;
 import com.yammer.dropwizard.json.ObjectMapperFactory;
 import com.yammer.dropwizard.testing.ResourceTest;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import uk.co.froot.demo.ember.api.blog.Post;
 import uk.co.froot.demo.ember.api.blog.PostList;
 import uk.co.froot.demo.ember.core.blog.PostReadService;
 import uk.co.froot.demo.ember.resources.PostResource;
+import uk.co.froot.ember.api.PostListFaker;
 import uk.co.froot.testing.AuthEveryoneAsAdminAuthenticator;
 import uk.co.froot.testing.TestRestrictedToProvider;
 
@@ -31,8 +34,12 @@ public class PostResourceTest extends ResourceTest {
   @Override
   protected void setUpResources() throws Exception {
 
+    PostList postList = PostListFaker.createPostList();
+
     // Prepare mocks first
-    when(postReadService.all()).thenReturn(new PostList());
+    when(postReadService.all()).thenReturn(postList);
+    when(postReadService.find(1)).thenReturn(Optional.of(postList.getPosts().get(0)));
+    when(postReadService.find(2)).thenReturn(Optional.of(postList.getPosts().get(1)));
 
     // Add resources
     addProvider(new TestRestrictedToProvider(new AuthEveryoneAsAdminAuthenticator()));
@@ -49,19 +56,30 @@ public class PostResourceTest extends ResourceTest {
   public ExpectedException thrown = ExpectedException.none();
 
   @Test
-  public void GET_Posts() {
+  public void GET_findAll() {
     // Arrange
-    int expectedPage = 0;
-    int expectedPageSize = 10;
 
     // Act
     PostList postList = client()
       .resource("/posts")
-      .queryParam("page", "0").queryParam("pageSize", "10")
       .get(PostList.class);
 
     // Assert
     assertThat(postList).isNotNull();
+
+  }
+
+  @Test
+  public void GET_find() {
+    // Arrange
+
+    // Act
+    Post post1 = client()
+      .resource("/posts/1")
+      .get(Post.class);
+
+    // Assert
+    assertThat(post1).isNotNull();
 
   }
 

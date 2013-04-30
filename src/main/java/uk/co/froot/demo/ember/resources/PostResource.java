@@ -40,21 +40,6 @@ public class PostResource extends BaseResource {
   public PostResource(PostReadService service) {
     this.service = service;
 
-    if (this.service.all().getPosts().isEmpty()) {
-      final Post post1 = new Post();
-      post1.setId(1);
-      post1.setTitle("Post 1");
-      post1.setBody("Post 1 body");
-
-      final Post post2 = new Post();
-      post2.setId(2);
-      post2.setTitle("Post 2");
-      post2.setBody("Post 2 body");
-
-      service.put(post1);
-      service.put(post2);
-    }
-
   }
     /**
      * Provide all posts
