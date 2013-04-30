@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
+import uk.co.froot.demo.ember.core.blog.InMemoryPostCache;
 import uk.co.froot.demo.ember.core.blog.PostReadService;
 
 import java.io.FileInputStream;
@@ -41,6 +42,9 @@ public class AppGuiceModule extends AbstractModule {
 
   @Override
   protected void configure() {
+
+    // Post cache (only a single instance required)
+    bind(InMemoryPostCache.class).asEagerSingleton();
 
     // Post support (only a single instance required)
     bind(PostReadService.class).asEagerSingleton();

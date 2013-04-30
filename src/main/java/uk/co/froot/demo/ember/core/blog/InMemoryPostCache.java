@@ -5,6 +5,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import uk.co.froot.demo.ember.api.blog.Post;
+import uk.co.froot.demo.ember.api.blog.PostList;
+
+import java.util.Map;
 
 /**
  * <p>Cache to provide the following to {@link Post}:</p>
@@ -27,13 +30,24 @@ public class InMemoryPostCache {
       .build();
   }
 
+  public PostList all() {
+
+    Map<String, Post> cacheMap = cache.asMap();
+
+    // Build a post list out of the cache entries
+    PostList postList = new PostList();
+    for (Map.Entry<String, Post> postEntry : cacheMap.entrySet()) {
+      postList.getPosts().add(postEntry.getValue());
+    }
+
+    return postList;
+  }
+
   /**
    * @return The matching ClientPost or absent
    */
-  public Optional<Post> get(String postId) {
-
-    return Optional.fromNullable(cache.getIfPresent(postId));
-
+  public Optional<Post> find(String id) {
+    return Optional.fromNullable(cache.getIfPresent(id));
   }
 
   /**
@@ -44,5 +58,4 @@ public class InMemoryPostCache {
     Preconditions.checkNotNull(post);
     cache.put(postId, post);
   }
-
 }

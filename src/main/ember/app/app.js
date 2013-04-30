@@ -16,13 +16,9 @@ App.IndexRoute = Ember.Route.extend({
   }
 });
 
-// which is served from the same origin under /api with a .json suffix
+// which is served from the same origin under /
 App.Adapter = DS.RESTAdapter.extend({
-  url: '/api',
-
-  buildURL: function(record, suffix) {
-    return this._super(record,suffix) + '.json'
-  }
+  url: 'http://localhost:8080'
 });
 
 // by means of a data store linked to a particular REST adapter

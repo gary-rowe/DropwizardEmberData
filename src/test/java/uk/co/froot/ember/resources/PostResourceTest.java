@@ -1,5 +1,7 @@
 package uk.co.froot.ember.resources;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.yammer.dropwizard.json.ObjectMapperFactory;
 import com.yammer.dropwizard.testing.ResourceTest;
 import org.junit.After;
 import org.junit.Rule;
@@ -17,6 +19,14 @@ import static org.mockito.Mockito.*;
 public class PostResourceTest extends ResourceTest {
 
   private PostReadService postReadService = mock(PostReadService.class);
+
+  @Override
+  protected ObjectMapperFactory getObjectMapperFactory() {
+
+    ObjectMapperFactory objectMapperFactory = new ObjectMapperFactory();
+    objectMapperFactory.enable(SerializationFeature.WRAP_ROOT_VALUE);
+    return objectMapperFactory;
+  }
 
   @Override
   protected void setUpResources() throws Exception {

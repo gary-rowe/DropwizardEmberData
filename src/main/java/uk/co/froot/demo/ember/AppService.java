@@ -50,6 +50,7 @@ public class AppService extends Service<AppConfiguration> {
 
     // Add asset bundles (brought in by the Maven Resources plugin)
     bootstrap.addBundle(new AssetsBundle("/assets", "/"));
+    bootstrap.addBundle(new AssetsBundle("/app", "/app"));
 
   }
 

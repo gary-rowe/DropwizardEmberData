@@ -22,7 +22,7 @@ public class FixtureAsserts {
   /**
    * Validates the fixture JSON and provides a minified String for comparison
    *
-   * @param fixtureClasspath The classpath (can be in other JARs)
+   * @param fixtureClasspath The classpath reference to the resource (e.g. "/fixtures/example.json")
    *
    * @return The contents as parsed by JSON
    *
@@ -49,7 +49,7 @@ public class FixtureAsserts {
    *
    * @param reason           The reason (e.g. "a Customer can be marshalled to JSON")
    * @param representation   The simple string representation
-   * @param fixtureClasspath The classpath reference to the resource (e.g. "fixtures/example.json")
+   * @param fixtureClasspath The classpath reference to the resource (e.g. "/fixtures/example.json")
    *
    * @throws java.io.IOException If something goes wrong
    */
