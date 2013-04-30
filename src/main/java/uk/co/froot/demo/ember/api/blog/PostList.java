@@ -1,6 +1,7 @@
 package uk.co.froot.demo.ember.api.blog;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 import com.yammer.dropwizard.json.JsonSnakeCase;
 
@@ -11,13 +12,17 @@ import java.util.List;
  * <ul>
  * <li>Provides pagination metadata for a collection of posts</li>
  * </ul>
- * </p>
  */
 @JsonSnakeCase
+@JsonRootName("posts")
 public class PostList {
+
+  // TODO Add pagination support
 
   @JsonProperty
   private List<Post> posts = Lists.newArrayList();
+
+  // TODO Consider sideloading comments etc
 
   public List<Post> getPosts() {
     return posts;

@@ -1,5 +1,6 @@
 package uk.co.froot.demo.ember;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.assets.AssetsBundle;
@@ -58,6 +59,7 @@ public class AppService extends Service<AppConfiguration> {
   public void run(AppConfiguration configuration, Environment environment) throws Exception {
 
     // Add any specialised configuration here
+    environment.getObjectMapperFactory().enable(SerializationFeature.WRAP_ROOT_VALUE);
   }
 
 }

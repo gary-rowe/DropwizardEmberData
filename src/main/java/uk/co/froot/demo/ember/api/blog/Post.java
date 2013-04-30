@@ -1,6 +1,7 @@
 package uk.co.froot.demo.ember.api.blog;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 import com.yammer.dropwizard.json.JsonSnakeCase;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * </p>
  */
 @JsonSnakeCase
+@JsonRootName("post")
 public class Post {
 
   @JsonProperty
