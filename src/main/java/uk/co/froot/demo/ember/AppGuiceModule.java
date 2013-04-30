@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
-import uk.co.froot.demo.ember.auth.InMemoryUserCache;
 import uk.co.froot.demo.ember.core.blog.PostReadService;
 
 import java.io.FileInputStream;
@@ -43,10 +42,7 @@ public class AppGuiceModule extends AbstractModule {
   @Override
   protected void configure() {
 
-    // OpenID support
-    bind(InMemoryUserCache.class).asEagerSingleton();
-
-    // Post support
+    // Post support (only a single instance required)
     bind(PostReadService.class).asEagerSingleton();
 
   }

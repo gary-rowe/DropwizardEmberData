@@ -1,27 +1,26 @@
 package uk.co.froot.demo.ember.auth.openid;
 
 
+import com.google.inject.Inject;
 import com.sun.jersey.api.model.Parameter;
 import com.sun.jersey.core.spi.component.ComponentContext;
 import com.sun.jersey.core.spi.component.ComponentScope;
 import com.sun.jersey.spi.inject.Injectable;
 import com.sun.jersey.spi.inject.InjectableProvider;
-import com.yammer.dropwizard.auth.Authenticator;
 import uk.co.froot.demo.ember.auth.annotation.RestrictedTo;
 
 /**
  * <p>Authentication provider to provide the following to Jersey:</p>
  * <ul>
- * <li>Bridge between Dropwizard and Jersey for HMAC authentication</li>
+ * <li>Bridge between Dropwizard and Jersey for authentication</li>
  * <li>Provides additional {@link uk.co.froot.demo.ember.api.security.Authority} information</li>
  * </ul>
  *
- * @param <T>    the principal type.
  * @since 0.0.1
  */
-public class OpenIDRestrictedToProvider<T> implements InjectableProvider<RestrictedTo, Parameter> {
+public class OpenIDRestrictedToProvider implements InjectableProvider<RestrictedTo, Parameter> {
 
-  private final Authenticator<OpenIDCredentials, T> authenticator;
+  private final OpenIDAuthenticator authenticator;
   private final String realm;
 
   /**
@@ -31,7 +30,11 @@ public class OpenIDRestrictedToProvider<T> implements InjectableProvider<Restric
    *                      convert them into instances of {@code T}
    * @param realm         the name of the authentication realm
    */
-  public OpenIDRestrictedToProvider(Authenticator<OpenIDCredentials, T> authenticator, String realm) {
+  @Inject
+  public OpenIDRestrictedToProvider(
+    OpenIDAuthenticator authenticator,
+    String realm
+  ) {
     this.authenticator = authenticator;
     this.realm = realm;
   }
@@ -45,7 +48,7 @@ public class OpenIDRestrictedToProvider<T> implements InjectableProvider<Restric
   public Injectable<?> getInjectable(ComponentContext ic,
                                      RestrictedTo a,
                                      Parameter c) {
-    return new OpenIDRestrictedToInjectable<T>(authenticator, realm, a.value());
+    return new OpenIDRestrictedToInjectable(authenticator, realm, a.value());
   }
 }
 

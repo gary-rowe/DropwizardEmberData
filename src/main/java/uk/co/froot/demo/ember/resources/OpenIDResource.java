@@ -3,6 +3,7 @@ package uk.co.froot.demo.ember.resources;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import org.openid4java.OpenIDException;
 import org.openid4java.consumer.ConsumerException;
 import org.openid4java.consumer.ConsumerManager;
@@ -21,9 +22,9 @@ import org.openid4java.util.HttpClientFactory;
 import org.openid4java.util.ProxyProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import uk.co.froot.demo.ember.auth.InMemoryUserCache;
 import uk.co.froot.demo.ember.api.security.Authority;
 import uk.co.froot.demo.ember.api.security.User;
+import uk.co.froot.demo.ember.auth.InMemoryUserCache;
 
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -43,9 +44,9 @@ import java.util.Set;
  */
 @Path("/openid")
 @Produces(MediaType.TEXT_HTML)
-public class PublicOpenIDResource extends BaseResource {
+public class OpenIDResource extends BaseResource {
 
-  private static final Logger log = LoggerFactory.getLogger(PublicOpenIDResource.class);
+  private static final Logger log = LoggerFactory.getLogger(OpenIDResource.class);
 
   private static final String OPENID_DISCOVERY_KEY = "openid-discovery-key";
   private final static String YAHOO_ENDPOINT = "https://me.yahoo.com";
@@ -53,8 +54,8 @@ public class PublicOpenIDResource extends BaseResource {
 
   public final ConsumerManager manager;
 
-
-  public PublicOpenIDResource() {
+  @Inject
+  public OpenIDResource() {
 
     // Proxy configuration must come before ConsumerManager construction
     ProxyProperties proxyProps = new ProxyProperties();

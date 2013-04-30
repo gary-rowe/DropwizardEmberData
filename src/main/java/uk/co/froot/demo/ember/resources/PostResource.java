@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * <p>Resource to provide the following to application:</p>
@@ -19,7 +20,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @since 0.0.1
  */
-@Path("/posts")
+@Path("/")
 @Produces(MediaType.TEXT_HTML)
 public class PostResource extends BaseResource {
 
@@ -33,9 +34,23 @@ public class PostResource extends BaseResource {
   /**
    * Provide all posts
    *
+   * @return An OK response (should really be HAL links)
+   */
+  @GET
+  @Timed
+  @CacheControl(noCache = true)
+  public Response getHome() {
+
+    return Response.ok().build();
+  }
+
+  /**
+   * Provide all posts
+   *
    * @return A paginated representation of all posts
    */
   @GET
+  @Path("/posts")
   @Timed
   @CacheControl(noCache = true)
   public PostList getAll() {
