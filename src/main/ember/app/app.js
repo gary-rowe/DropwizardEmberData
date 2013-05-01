@@ -52,9 +52,7 @@ App.Post = DS.Model.extend({
 
 // and a simple default router which just returns the result of querying the Post model with a specific ID
 App.IndexRoute = Ember.Route.extend({
-  model: function() {
-    return App.Post.find(1);
-  }
+  model: App.Post.find()
 });
 
 // which is served from the same origin under /
