@@ -83,7 +83,7 @@ confined to a bit of configuration of JSON files.
 Think of `npm` as the package manager of JavaScript. You can get all the dependencies using
 
 ```
-cd <project root>/src/main/ember/app
+cd <project root>/src/main/ember
 npm install
 ```
 
@@ -97,7 +97,7 @@ is a good idea.
 Once all dependencies are in place run Grunt. The `Gruntfile.js` contains more information about what is going on.
 
 ```
-cd <project root>/src/main/ember/app
+cd <project root>/src/main/ember
 grunt
 ```
 

@@ -1,6 +1,7 @@
 package uk.co.froot.demo.ember.api.blog;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 import com.yammer.dropwizard.json.JsonSnakeCase;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * </ul>
  */
 @JsonSnakeCase
-//@JsonRootName("post_list")
+@JsonRootName("post_list")
 public class PostList {
 
   // TODO Add pagination support
