@@ -11,21 +11,13 @@ import uk.co.froot.demo.ember.api.blog.PostList;
 public class PostListFaker {
 
   /**
-   *
    * @return A post list with two default entries
    */
   public static PostList createPostList() {
 
-    // Initialise with a couple of basic posts for now
-    final Post post1 = new Post();
-    post1.setId(1);
-    post1.setTitle("Post 1");
-    post1.setBody("Post 1 body");
-
-    final Post post2 = new Post();
-    post2.setId(2);
-    post2.setTitle("Post 2");
-    post2.setBody("Post 2 body");
+    // Initialise with a couple of basic posts
+    final Post post1 = PostFaker.createPostNoComments(1L);
+    final Post post2 = PostFaker.createPostNoComments(2L);
 
     PostList postList = new PostList();
     postList.getPosts().add(post1);

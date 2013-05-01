@@ -7,14 +7,14 @@ import com.yammer.dropwizard.testing.JsonHelpers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import uk.co.froot.demo.ember.api.blog.PostList;
+import uk.co.froot.demo.ember.api.blog.Post;
 import uk.co.froot.testing.FixtureAsserts;
 
 import java.io.IOException;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
-public class PostListTest {
+public class PostTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
@@ -26,24 +26,16 @@ public class PostListTest {
     ObjectMapper objectMapper = new ObjectMapperFactory().build();
 
     // Act
-    PostList testObject = objectMapper.readValue(FixtureHelpers.fixture("fixtures/post/test-post-list.json"),PostList.class);
+    Post testObject = objectMapper.readValue(FixtureHelpers.fixture("fixtures/post/test-post-1.json"),Post.class);
 
     // Assert
-    assertThat(testObject.getPosts().size()).isEqualTo(2);
-
-    // Post 1
-    assertThat(testObject.getPosts().get(0).getId()).isEqualTo(1);
-    assertThat(testObject.getPosts().get(0).getTitle()).isEqualTo("Post 1");
-
-    // Post 2
-    assertThat(testObject.getPosts().get(1).getId()).isEqualTo(2);
-    assertThat(testObject.getPosts().get(1).getTitle()).isEqualTo("Post 2");
+    assertThat(testObject.getId()).isEqualTo(1);
 
     // Marshal
     FixtureAsserts.assertStringMatchesJsonFixture(
-      "PostList",
+      "Post",
       JsonHelpers.asJson(testObject),
-      "/fixtures/post/test-post-list.json");
+      "/fixtures/post/test-post-1.json");
 
   }
 

@@ -19,7 +19,7 @@ import java.util.List;
 public class Post {
 
   @JsonProperty
-  private Integer id;
+  private Long id;
 
   @JsonProperty
   private String title;
@@ -28,21 +28,21 @@ public class Post {
   private String body;
 
   @JsonProperty
-  private List<Integer> commentIds = Lists.newArrayList();
+  private List<Long> commentIds = Lists.newArrayList();
 
-  public Integer getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public List<Integer> getCommentIds() {
+  public List<Long> getCommentIds() {
     return commentIds;
   }
 
-  public void setCommentIds(List<Integer> commentIds) {
+  public void setCommentIds(List<Long> commentIds) {
     this.commentIds = commentIds;
   }
 

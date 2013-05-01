@@ -37,25 +37,76 @@ public class InMemoryPostCache {
     // Build a post list out of the cache entries
     PostList postList = new PostList();
     for (Map.Entry<String, Post> postEntry : cacheMap.entrySet()) {
-      postList.getPosts().add(postEntry.getValue());
+      Post clone = clone(postEntry.getValue(), postEntry.getValue().getId());
+      postList.getPosts().add(clone);
     }
 
     return postList;
   }
 
   /**
-   * @return The matching ClientPost or absent
+   * @return The matching Post or absent
    */
   public Optional<Post> find(String id) {
-    return Optional.fromNullable(cache.getIfPresent(id));
+
+    Optional<Post> optional = Optional.fromNullable(cache.getIfPresent(id));
+
+    if (optional.isPresent()) {
+      Post clone = clone(optional.get(),optional.get().getId());
+      return Optional.of(clone);
+    }
+
+    return optional;
   }
 
   /**
-   * @param postId The ID to use to locate the Post
+   * @param post   The Post to cache
+   */
+  public Post create(Post post) {
+    Preconditions.checkNotNull(post);
+    Preconditions.checkState(post.getId() == null);
+
+    long id = cache.size()+1;
+
+    Post cachePost = clone(post, id);
+
+    cache.put(String.valueOf(id), cachePost);
+
+    post.setId(id);
+
+    // Return the provided not the cache copy to prevent reference leakage
+    return post;
+  }
+
+  /**
    * @param post   The client Post to cache
    */
-  public void put(String postId, Post post) {
+  public Post update(Post post) {
     Preconditions.checkNotNull(post);
-    cache.put(postId, post);
+    Preconditions.checkNotNull(post.getId());
+
+    // Check if the post is present
+    Optional<Post> optional = Optional.fromNullable(cache.getIfPresent(post.getId()));
+    if (optional.isPresent()) {
+      Post cachePost = optional.get();
+      cachePost.setBody(post.getBody());
+      cachePost.setTitle(post.getTitle());
+
+      // Replace the cache
+      cache.put(String.valueOf(post.getId()), post);
+
+    }
+
+    // Return the provided not the cache copy to prevent reference leakage
+    return post;
   }
+
+  private Post clone(Post post, long id) {
+    Post cachePost = new Post();
+    cachePost.setId(id);
+    cachePost.setTitle(post.getTitle());
+    cachePost.setBody(post.getBody());
+    return cachePost;
+  }
+
 }

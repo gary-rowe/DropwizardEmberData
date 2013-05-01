@@ -1,7 +1,9 @@
 package uk.co.froot.demo.ember.resources;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.Locale;
 
@@ -28,10 +30,6 @@ public abstract class BaseResource {
   @Context
   protected HttpHeaders httpHeaders;
 
-  public BaseResource() {
-
-  }
-
   /**
    * @return The most appropriate locale for the upstream request (never null)
    */
@@ -50,4 +48,19 @@ public abstract class BaseResource {
     }
     return locale;
   }
+
+  /**
+   * @return A suitable exception to represent NOT_FOUND
+   */
+  protected WebApplicationException notFound() {
+    return new WebApplicationException(Response.Status.NOT_FOUND);
+  }
+
+  /**
+   * @return A suitable exception to represent BAD_REQUEST
+   */
+  protected WebApplicationException badRequest() {
+    return new WebApplicationException(Response.Status.BAD_REQUEST);
+  }
+
 }

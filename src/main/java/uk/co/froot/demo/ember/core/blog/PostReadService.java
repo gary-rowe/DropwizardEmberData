@@ -22,18 +22,16 @@ public class PostReadService {
 
     // Initialise with a couple of basic posts for now
     final Post post1 = new Post();
-    post1.setId(1);
     post1.setTitle("Post 1");
     post1.setBody("Post 1 body");
 
     final Post post2 = new Post();
-    post2.setId(2);
     post2.setTitle("Post 2");
     post2.setBody("Post 2 body");
 
     // Persist them into the cache
-    put(post1);
-    put(post2);
+    create(post1);
+    create(post2);
 
   }
 
@@ -45,7 +43,11 @@ public class PostReadService {
     return postCache.find(String.valueOf(id));
   }
 
-  public void put(Post post) {
-    postCache.put(String.valueOf(post.getId()), post);
+  public Post create(Post post) {
+    return postCache.create(post);
+  }
+
+  public Post update(Post post) {
+    return postCache.update(post);
   }
 }
