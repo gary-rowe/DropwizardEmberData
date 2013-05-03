@@ -50129,42 +50129,58 @@ Handlebars.template = Handlebars.VM.template;
 
 (function() {
 
-Ember.TEMPLATES["application"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["posts"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [2,'>= 1.0.0-rc.3'];
+helpers = helpers || Ember.Handlebars.helpers; data = data || {};
+  var buffer = '', stack1, hashTypes, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1, stack2, hashTypes, options;
+  data.buffer.push("\n    <div class=\"summaryItem\">\n      ");
+  hashTypes = {};
+  options = {hash:{},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0,depth0],types:["ID","ID"],hashTypes:hashTypes,data:data};
+  stack2 = ((stack1 = helpers.linkTo),stack1 ? stack1.call(depth0, "posts.selectedPost", "post", options) : helperMissing.call(depth0, "linkTo", "posts.selectedPost", "post", options));
+  if(stack2 || stack2 === 0) { data.buffer.push(stack2); }
+  data.buffer.push("\n    </div>\n  ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = '', hashTypes;
+  data.buffer.push("\n        ");
+  hashTypes = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "post.title", {hash:{},contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n      ");
+  return buffer;
+  }
+
+  hashTypes = {};
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data})));
+  data.buffer.push("\n<p>Hello</p>\n\n<!-- Put control list -->\n\n<div class=\"summaryViewList\">\n  ");
+  hashTypes = {};
+  stack1 = helpers.each.call(depth0, "post", "in", "controller", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],hashTypes:hashTypes,data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n</div>\n");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["posts/selected_post"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [2,'>= 1.0.0-rc.3'];
 helpers = helpers || Ember.Handlebars.helpers; data = data || {};
   var buffer = '', hashTypes, escapeExpression=this.escapeExpression;
 
 
+  data.buffer.push("<div id=\"selectedPost\">\n  <h1>Title: ");
   hashTypes = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "outlet", {hash:{},contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data})));
-  data.buffer.push("\n");
-  return buffer;
-  
-});
-
-Ember.TEMPLATES["index"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [2,'>= 1.0.0-rc.3'];
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, escapeExpression=this.escapeExpression, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = '', hashTypes;
-  data.buffer.push("\n  <h1>");
-  hashTypes = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "title", {hash:{},contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data})));
-  data.buffer.push("</h1>\n  <p>");
-  hashTypes = {};
-  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "body", {hash:{},contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data})));
-  data.buffer.push("</p>\n");
-  return buffer;
-  }
-
-  data.buffer.push("<p>If everything is working you'll see some text below:</p>\n");
-  hashTypes = {};
-  stack1 = helpers.each.call(depth0, "people", {hash:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n");
+  data.buffer.push(escapeExpression(helpers._triageMustache.call(depth0, "postTitle", {hash:{},contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data})));
+  data.buffer.push("</h1>\n\n  <div class=\"selectedPostItem\">\n    <img id=\"selectedPost\" ");
+  hashTypes = {'src': "STRING"};
+  data.buffer.push(escapeExpression(helpers.bindAttr.call(depth0, {hash:{
+    'src': ("postUrl")
+  },contexts:[],types:[],hashTypes:hashTypes,data:data})));
+  data.buffer.push("/>\n  </div>\n</div>");
   return buffer;
   
 });
@@ -50175,33 +50191,225 @@ function program1(depth0,data) {
 
 
 
-// Our application (which will track transitions in the browser console)
-var App = Ember.Application.create({
+// Create the application
+App = Ember.Application.create({
   LOG_TRANSITIONS: true,
   rootElement: '#dedd'
 });
 
-// has a model for a "Post" linked to an Ember data store (DS)
+App.store  = DS.Store.create({
+  adapter:  "DS.RESTAdapter",
+  revision: 12
+});
+
+/*
+ * Model layer.
+ * Ember.Object itself provides most of what
+ * model layers elsewhere provide. Since TodoMVC
+ * doesn't communicate with a server, plain
+ * Ember.Objects will do.
+ */
+
+})();
+
+(function() {
+
 App.Post = DS.Model.extend({
-  title: DS.attr('string'),
-  body: DS.attr('string')
+    title: DS.attr('string'),
+    body: DS.attr('string')
 });
 
-// and a simple default router which just returns the result of querying the Post model with a specific ID
+})();
+
+(function() {
+
+
+
+/*
+ * Views layer.
+ * You'll notice that there are only a few views.
+ * Ember accomplishes a lot in its templates and
+ * Views are only necessary if you have view-specific
+ * programming to do.
+ */
+
+})();
+
+(function() {
+
+App.PostSummaryView = Ember.View.extend({
+  tagName: 'post',
+  attributeBindings: ['src'],
+  classNames: ['summaryItem'],
+  classNameBindings: 'isSelected',
+
+  isSelected: function() {
+    return this.get('content.id') ===
+      this.get('controller.controllers.postsSelectedPost.content.id');
+  }.property('controller.controllers.postsSelectedPost.content', 'content')
+});
+
+})();
+
+(function() {
+
+
+
+/*
+ * Controller layer.
+ * Controllers wrap objects and provide a place
+ * to implement properties for display
+ * whose value is computed from the content of the
+ * controllers wrapped objects.
+ */
+
+})();
+
+(function() {
+
+App.PostsController = Ember.ArrayController.extend({
+    needs: ['postsSelectedPost'],
+
+    selectPostAction: function(post) {
+        this.set('selectedPost', post);
+    },
+
+    nextPost: function() {
+        var selectedPost = null;
+        if (!this.get('controllers.postsSelectedPost.content')) {
+            this.transitionToRoute("posts.selectedPost", this.get('content.firstObject'));
+        } else {
+            var selectedIndex = this.findSelectedItemIndex();
+
+            if (selectedIndex >= (this.get('content.length') - 1)) {
+                selectedIndex = 0;
+            } else {
+                selectedIndex++;
+            }
+
+            this.transitionToRoute("posts.selectedPost", this.get('content').objectAt(selectedIndex))
+        }
+    },
+
+    prevPost: function() {
+        console.log('PostListController prevPost');
+        if (!this.get('controllers.postsSelectedPost.content')) {
+            this.transitionToRoute("posts.selectedPost", this.get('content.lastObject'));
+        } else {
+            var selectedIndex = this.findSelectedItemIndex();
+
+            if (selectedIndex <= 0) {
+                selectedIndex = this.get('content.length') - 1;
+            } else {
+                selectedIndex--;
+            }
+
+            this.transitionToRoute("posts.selectedPost", this.get('content').objectAt(selectedIndex))
+        }
+    },
+
+    findSelectedItemIndex: function() {
+        var content = this.get('content');
+        var selectedPost = this.get('controllers.postsSelectedPost.content');
+
+        for (index = 0; index < content.get('length'); index++) {
+            if (this.get('controllers.postsSelectedPost.content') === content.objectAt(index)) {
+                return index;
+            }
+        }
+
+        return 0;
+    }
+});
+
+})();
+
+(function() {
+
+
+
+})();
+
+(function() {
+
+App.PostControlsController = Ember.Controller.extend({
+    needs: ['posts', 'postsSelectedPost'],
+    slideshowTimerId: null,
+
+    playSlideshow: function() {
+        console.log('playSlideshow');
+        var controller = this;
+        controller.nextPost();
+        this.set('slideshowTimerId', setInterval(function() {
+            Ember.run(function() {
+                controller.nextPost();
+            });
+        }, 4000));
+    },
+
+    stopSlideshow: function() {
+        console.log('stopSlideshow');
+        clearInterval(this.get('slideshowTimerId'));
+        this.set('slideshowTimerId', null);
+    },
+
+    nextPost: function() {
+        console.log('nextPost');
+        this.get('controllers.posts').nextPost();
+    },
+
+    prevPost: function() {
+        console.log('prevPost');
+        this.get('controllers.posts').prevPost();
+    }
+});
+
+})();
+
+(function() {
+
+
+
+})();
+
+(function() {
+
+App.PostsSelectedPostController = Ember.ObjectController.extend({});
+
+})();
+
+(function() {
+
+
+
+/*
+ * States (i.e. Routes)
+ * Handles serialization of the application's current state
+ * which results in view hierarchy updates. Responds to
+ * actions.
+ */
+
+})();
+
+(function() {
+
+App.Router.map(function() {
+	this.route("index", {path: "/"});
+    this.resource("posts", {path: "/posts"}, function() {
+        this.route("selectedPost", {path: ":post_id"})
+    });
+});
+
 App.IndexRoute = Ember.Route.extend({
-  model: App.Post.find()
+    redirect: function() {
+        this.transitionTo('posts');
+    }
 });
 
-// which is served from the same origin under /
-App.Adapter = DS.RESTAdapter.extend({
-  url: 'http://localhost:8080'
+App.PostsRoute = Ember.Route.extend({
+    model: function() {
+        return App.Post.find();
+    }
 });
-
-// by means of a data store linked to a particular REST adapter
-App.Store = DS.Store.extend({
-  revision: 12,
-  adapter: App.Adapter.create({})
-});
-
 
 })();

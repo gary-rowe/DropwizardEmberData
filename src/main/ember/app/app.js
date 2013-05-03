@@ -38,30 +38,50 @@ require('dependencies/ember-data');
  */
 require('dependencies/compiled/templates');
 
-// Our application (which will track transitions in the browser console)
-var App = Ember.Application.create({
+// Create the application
+App = Ember.Application.create({
   LOG_TRANSITIONS: true,
   rootElement: '#dedd'
 });
 
-// has a model for a "Post" linked to an Ember data store (DS)
-App.Post = DS.Model.extend({
-  title: DS.attr('string'),
-  body: DS.attr('string')
+App.store  = DS.Store.create({
+  adapter:  "DS.RESTAdapter",
+  revision: 12
 });
 
-// and a simple default router which just returns the result of querying the Post model with a specific ID
-App.IndexRoute = Ember.Route.extend({
-  model: App.Post.find()
-});
+/*
+ * Model layer.
+ * Ember.Object itself provides most of what
+ * model layers elsewhere provide. Since TodoMVC
+ * doesn't communicate with a server, plain
+ * Ember.Objects will do.
+ */
+require('app/models/post');
 
-// which is served from the same origin under /
-App.Adapter = DS.RESTAdapter.extend({
-  url: 'http://localhost:8080'
-});
+/*
+ * Views layer.
+ * You'll notice that there are only a few views.
+ * Ember accomplishes a lot in its templates and
+ * Views are only necessary if you have view-specific
+ * programming to do.
+ */
+require('app/views/post_summary');
 
-// by means of a data store linked to a particular REST adapter
-App.Store = DS.Store.extend({
-  revision: 12,
-  adapter: App.Adapter.create({})
-});
+/*
+ * Controller layer.
+ * Controllers wrap objects and provide a place
+ * to implement properties for display
+ * whose value is computed from the content of the
+ * controllers wrapped objects.
+ */
+require('app/controllers/posts_controller');
+require('app/controllers/post_controls_controller');
+require('app/controllers/selected_post_controller');
+
+/*
+ * States (i.e. Routes)
+ * Handles serialization of the application's current state
+ * which results in view hierarchy updates. Responds to
+ * actions.
+ */
+require('app/routes/router');
