@@ -8,7 +8,6 @@ import uk.co.froot.demo.ember.api.blog.Post;
 import uk.co.froot.demo.ember.api.blog.PostList;
 import uk.co.froot.demo.ember.core.blog.PostReadService;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -95,7 +94,7 @@ public class PostResource extends BaseResource {
   @Path("/{id}")
   @CacheControl(noCache = true)
   public Post find(
-    @PathParam("id") @Digits(integer = 5, fraction = 0) Integer id) {
+    @PathParam("id") Integer id) {
 
     Optional<Post> optional = service.find(id);
 

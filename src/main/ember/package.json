@@ -16,6 +16,7 @@
     "grunt-contrib-jshint": "~0.1.1rc5",
     "grunt-contrib-qunit": "~0.1.1rc5",
     "grunt-contrib-watch": "~0.2.0rc5",
+    "grunt-contrib-copy": "~0.4.1",
     "grunt-ember-templates": "~0.4.2rc5"
   }
 }

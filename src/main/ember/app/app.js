@@ -44,9 +44,15 @@ App = Ember.Application.create({
   rootElement: '#dedd'
 });
 
-App.store  = DS.Store.create({
-  adapter:  "DS.RESTAdapter",
-  revision: 12
+// Map all requests to /api
+App.Adapter = DS.RESTAdapter.extend({
+  url: '/api'
+});
+
+// and attach it to the main App
+App.store = DS.Store.extend({
+  revision: 12,
+  adapter: App.Adapter.create({})
 });
 
 /*
