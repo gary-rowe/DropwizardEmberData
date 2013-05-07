@@ -1,0 +1,360 @@
+/*
+   Colours - see http://colorschemedesigner.com/#3e31T7D--vyw04zT--
+   Primary covers the largest screen area
+   1: base, 2: darker, 3: darkest, 4: light, 5: lightest
+*/
+@bodyBackgroundColor: #dbdbdb;
+@bodyColor: #747474;
+@logoTextColor: #3b3b3b;
+@contentBackgroundColor: #fff;
+@container1BackgroundColor: #fff;
+@container2BackgroundColor: #3b3b3b;
+
+/* Links and bright boxes */
+@primaryColor1: #C2F0F4;
+@primaryColor2: #4EE0F8;
+@primaryColor3: #41A093;
+@primaryColor4: #D1F0F3;
+@primaryColor5: #E0F0F8;
+/* E0F0F8 is used in the client */
+
+/* Menus, navbars and message alerts */
+@secondaryColorA1: #FFE9C2;
+@secondaryColorA2: #C0B49E;
+@secondaryColorA3: #A78241;
+@secondaryColorA4: #FFEFD1;
+@secondaryColorA5: #FFF3DE;
+
+/* Headings and action buttons */
+@secondaryColorB1: #FFC2C8;
+@secondaryColorB2: #C09EA1;
+@secondaryColorB3: #A7414A;
+@secondaryColorB4: #FFD1D6;
+@secondaryColorB5: #FFDEE1;
+
+/* Positioning */
+@logoWidth: 1000px;
+@contentWidth: (@logoWidth * 0.60);
+@boxWidth: (@logoWidth * 0.30);
+
+body {
+  background-color: @bodyBackgroundColor;
+  color: @bodyColor;
+  font-family: "Helvetica Neue", "Liberation Sans", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+  font-weight: normal;
+}
+
+h1 {
+  color: @secondaryColorB3;
+  font-size: 160%;
+}
+
+h2 {
+  color: @secondaryColorB3;
+  font-size: 130%;
+}
+
+h3 {
+  color: @secondaryColorB3;
+  font-size: 100%;
+}
+
+h1 img, h2 img, h3 img {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+/* Links */
+a:link, a:visited, a:active {
+  color: @secondaryColorB3;
+}
+
+a:link:hover, a:visited:hover, a:active:hover {
+  color: @secondaryColorB3;
+}
+
+a img {
+  border: 0;
+}
+
+/* Layout */
+#container1 {
+  background-color: @container1BackgroundColor;
+}
+
+/* Contains the menu bar */
+#container2 {
+  background-color: @container2BackgroundColor;
+  border-bottom: 3px solid @logoTextColor;
+  border-top: 3px solid @logoTextColor;
+  -moz-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.15);
+  background-image: linear-gradient(bottom, #000 0%, @logoTextColor 80%);
+  background-image: -o-linear-gradient(bottom, #000 0%, @logoTextColor 80%);
+  background-image: -moz-linear-gradient(bottom, #000 0%, @logoTextColor 80%);
+  background-image: -webkit-linear-gradient(bottom, #000 0%, @logoTextColor 80%);
+  background-image: -ms-linear-gradient(bottom, #000 0%, @logoTextColor 80%);
+}
+
+.wrap {
+  width: @logoWidth;
+  margin: auto;
+  position: relative;
+}
+
+/* These images form the background scrolling effect */
+#back1 {
+  background: fixed url(/images/common/back2.png) repeat;
+}
+
+#back2 {
+  background: fixed url(/images/common/back1.png) repeat;
+}
+
+/* Logo */
+#logo {
+  display: block;
+  background-color: @contentBackgroundColor;
+  background-image: url(/images/common/banner.png);
+  background-repeat:no-repeat;
+  height: 100px;
+  width: @logoWidth;
+}
+
+#logo span {
+  display: none;
+}
+
+#logotext {
+  font-size: 70px;
+  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+  display: inline-block;
+  color: @logoTextColor;
+  white-space: nowrap;
+  margin: 10px 0px 0px 80px;
+  height: 80px;
+}
+
+.home {
+  font-size: 16px;
+}
+
+/* Main navbar menu */
+#menu {
+  padding: 0px;
+  margin: 0px;
+  margin: auto;
+  position: relative;
+  height: 32px;
+}
+
+#menu li {
+  list-style: none;
+  float: left;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#menu li a, #menu li a:active, #menu li a:visited, #menu li a:link {
+  font-family: 'Ubuntu', sans-serif;
+  height: 18px;
+  font-size: 90%;
+  display: block;
+  color: #dddddd;
+  text-decoration: none;
+  padding: 6px 10px;
+}
+
+#menu li:hover a, #menu li.active a {
+  color: #fff;
+}
+
+#menu li:hover, #menu li.active {
+  background-color: #575757;
+  background-image: linear-gradient(bottom, #3d3d3d 20%, #575757 80%);
+  background-image: -o-linear-gradient(bottom, #3d3d3d 20%, #575757 80%);
+  background-image: -moz-linear-gradient(bottom, #3d3d3d 20%, #575757 80%);
+  background-image: -webkit-linear-gradient(bottom, #3d3d3d 20%, #575757 80%);
+  background-image: -ms-linear-gradient(bottom, #3d3d3d 20%, #575757 80%);
+  border: 1px solid #000;
+}
+
+/* Appears at the top of the screen to provide messages to the users */
+.alert-message {
+  background-color: @secondaryColorA5;
+  border: 1px solid @secondaryColorA3;
+  margin: 10px 0px;
+  padding: 10px;
+  color: #000;
+}
+
+.alert-message.success {
+  background-color: @primaryColor5;
+  border-color: @primaryColor3;
+}
+
+.alert-message.info {
+  background-color: @secondaryColorA5;
+  border-color: @secondaryColorA3;
+}
+
+.alert-message.error {
+  background-color: @secondaryColorB5;
+  border-color: @secondaryColorB3;
+}
+
+#content-full {
+  margin-top: 5px;
+  position: relative;
+  padding: 15px (@logoWidth - @contentWidth - @boxWidth - 20) 20px 20px;
+  width: (@contentWidth + @boxWidth);
+  text-align: justify;
+  background-color: @contentBackgroundColor;
+  min-height: 1100px;
+  -moz-box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.05);
+}
+
+#content {
+  margin-top: 5px;
+  position: relative;
+  padding: 15px (@logoWidth - @contentWidth - 20) 20px 20px;
+  width: @contentWidth;
+  text-align: justify;
+  background-color: @contentBackgroundColor;
+  min-height: 1100px;
+  -moz-box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.05);
+}
+
+#content td {
+  text-align: left;
+}
+
+#downloadbox {
+  width: @boxWidth;
+  height: 500px;
+  font-size: 15px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: @primaryColor5;
+  border: 1px solid @secondaryColorB3;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 10px;
+}
+
+#infobox {
+  width: @boxWidth;
+  height: 500px;
+  position: absolute;
+  top: 550px;
+  right: 20px;
+  background-color: @primaryColor5;
+  border: 1px solid @primaryColor3;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 10px;
+}
+
+#infobox small {
+  font-size: 11px;
+}
+
+#footer {
+  position: relative;
+  padding-left: 40px;
+  padding-bottom: 40px;
+  text-align: left;
+  font-size: 14px;
+  background-color: @contentBackgroundColor;
+}
+
+#footer>div {
+  float: left;
+  margin-right: 200px;
+  padding-top: 6px;
+  border-top: @primaryColor5 2px solid;
+}
+
+/* Used in table of contents and index pages */
+.index, .index ul, .index li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.index {
+  padding: 20px;
+  border: 2px dashed @primaryColor4;
+  display: inline-block;
+}
+
+.index>li>a {
+  font-weight: bold;
+}
+
+.index>ul {
+  padding: 20px 0px 20px 20px;
+}
+
+.index a, .index a:link, .index a:active, .index a:visited {
+  display: block;
+  text-decoration: none;
+}
+
+.list>li {
+  padding: 5px 0px 5px 0px;
+}
+
+.versiontext {
+  text-align: left;
+}
+
+.download a {
+  font-size: 20px;
+}
+
+@font-face {
+  font-family: 'UbuntuRegular';
+  src: url('/assets/font/ubuntu-r-webfont.eot');
+  src: url('/assets/font/ubuntu-r-webfont.eot?iefix') format('eot'), url('/assets/font/ubuntu-r-webfont.woff') format('woff'), url('/assets/font/ubuntu-r-webfont.ttf') format('truetype'), url('/assets/font/ubuntu-r-webfont.svg#webfontKT0zjHSC') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UbuntuItalic';
+  src: url('/assets/font/ubuntu-ri-webfont.eot');
+  src: url('/assets/font/ubuntu-ri-webfont.eot?iefix') format('eot'), url('/assets/font/ubuntu-ri-webfont.woff') format('woff'), url('/assets/font/ubuntu-ri-webfont.ttf') format('truetype'), url('/assets/font/ubuntu-ri-webfont.svg#webfontGetaoUfe') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UbuntuBold';
+  src: url('/assets/font/ubuntu-b-webfont.eot');
+  src: url('/assets/font/ubuntu-b-webfont.eot?iefix') format('eot'), url('/assets/font/ubuntu-b-webfont.woff') format('woff'), url('/assets/font/ubuntu-b-webfont.ttf') format('truetype'), url('/assets/font/ubuntu-b-webfont.svg#webfontEreyFiHC') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UbuntuBoldItalic';
+  src: url('/assets/font/ubuntu-bi-webfont.eot');
+  src: url('/assets/font/ubuntu-bi-webfont.eot?iefix') format('eot'), url('/assets/font/ubuntu-bi-webfont.woff') format('woff'), url('/assets/font/ubuntu-bi-webfont.ttf') format('truetype'), url('/assets/font/ubuntu-bi-webfont.svg#webfontf1YowZka') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
