@@ -105,6 +105,7 @@ public class InMemoryPostCache {
     Post cachePost = new Post();
     cachePost.setId(id);
     cachePost.setTitle(post.getTitle());
+    cachePost.setSummary(post.getSummary());
     cachePost.setBody(post.getBody());
     return cachePost;
   }

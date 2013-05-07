@@ -33,7 +33,7 @@ import java.net.URI;
  * @since 0.0.1
  */
 @Path("/posts")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces("application/json; charset=UTF-8")
 @Consumes(MediaType.APPLICATION_JSON)
 public class PostResource extends BaseResource {
 
@@ -57,6 +57,7 @@ public class PostResource extends BaseResource {
 
     if (post.getId() != null
       || post.getTitle() == null || post.getTitle().trim().isEmpty()
+      || post.getSummary() == null || post.getSummary().trim().isEmpty()
       || post.getBody() == null || post.getBody().trim().isEmpty()
       ) {
       throw badRequest();
@@ -119,6 +120,7 @@ public class PostResource extends BaseResource {
 
     if (post.getId() == null
       || post.getTitle() == null || post.getTitle().trim().isEmpty()
+      || post.getSummary() == null || post.getSummary().trim().isEmpty()
       || post.getBody() == null || post.getBody().trim().isEmpty()
       ) {
       throw badRequest();

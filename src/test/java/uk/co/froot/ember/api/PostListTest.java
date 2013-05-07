@@ -33,11 +33,11 @@ public class PostListTest {
 
     // Post 1
     assertThat(testObject.getPosts().get(0).getId()).isEqualTo(1);
-    assertThat(testObject.getPosts().get(0).getTitle()).isEqualTo("Post 1");
+    assertThat(testObject.getPosts().get(0).getTitle()).isEqualTo("Title 1");
 
     // Post 2
     assertThat(testObject.getPosts().get(1).getId()).isEqualTo(2);
-    assertThat(testObject.getPosts().get(1).getTitle()).isEqualTo("Post 2");
+    assertThat(testObject.getPosts().get(1).getTitle()).isEqualTo("Title 2");
 
     // Marshal
     FixtureAsserts.assertStringMatchesJsonFixture(

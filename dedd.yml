@@ -1,5 +1,6 @@
 # Define the HTTP settings
 http:
+  rootPath: /api/*
   port: 8080
   adminPort: 8081
 

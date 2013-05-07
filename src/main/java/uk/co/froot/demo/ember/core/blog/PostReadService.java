@@ -22,12 +22,14 @@ public class PostReadService {
 
     // Initialise with a couple of basic posts for now
     final Post post1 = new Post();
-    post1.setTitle("Post 1");
-    post1.setBody("Post 1 body");
+    post1.setTitle("Title 1");
+    post1.setSummary("Summary 1");
+    post1.setBody("Body 1");
 
     final Post post2 = new Post();
-    post2.setTitle("Post 2");
-    post2.setBody("Post 2 body");
+    post2.setTitle("Title 2");
+    post2.setSummary("Summary 2");
+    post2.setBody("Body 2");
 
     // Persist them into the cache
     create(post1);
