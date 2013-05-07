@@ -11,6 +11,7 @@ App.IndexRoute = Ember.Route.extend({
     }
 });
 
+// Provides access to all the Posts
 App.PostsRoute = Ember.Route.extend({
     model: function() {
         return App.Post.find();

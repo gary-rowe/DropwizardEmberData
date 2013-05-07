@@ -1,14 +1,17 @@
-{{outlet}}
-<p>Hello there</p>
+<div>
+  <p>All Posts</p>
+  <div>
+    {{#each post in controller}}
+      <div>
+        {{#linkTo posts.selectedPost post}}
+          {{post.title}}
+        {{/linkTo}}
+      </div>
+    {{/each}}
+  </div>
+</div>
 
-<!-- Put control list -->
-
-<div class="summaryViewList">
-  {{#each post in controller}}
-    <div class="summaryItem">
-      {{#linkTo posts.selectedPost post}}
-        {{post.title}}
-      {{/linkTo}}
-    </div>
-  {{/each}}
+<div>
+  <p>Selected Post</p>
+  {{outlet}}
 </div>
