@@ -2,14 +2,16 @@
   "posts": [
     {
       "id": 1,
-      "title": "Post 1",
-      "body": "Post 1 body",
+      "title": "Title 1",
+      "summary": "Summary 1",
+      "body": "Body 1",
       "comment_ids": []
     },
     {
       "id": 2,
-      "title": "Post 2",
-      "body": "Post 2 body",
+      "title": "Title 2",
+      "summary": "Summary 2",
+      "body": "Body 2",
       "comment_ids": []
     }
   ]

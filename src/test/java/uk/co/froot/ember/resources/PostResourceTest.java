@@ -111,6 +111,7 @@ public class PostResourceTest extends ResourceTest {
     Post post = new Post();
     post.setId(3L);
     post.setTitle("Test title");
+    post.setSummary("Test summary");
     post.setBody("Test body");
 
     // Act

@@ -1,6 +1,7 @@
 {
   "id":1,
-  "title":"Post 1",
-  "body":"# Post 1 heading\\n\\n[A link to some other article](http://gary-rowe.com)",
+  "title":"Title 1",
+  "summary":"Summary 1",
+  "body":"# Body 1 heading\\n\\n[A link to some other article](http://gary-rowe.com)",
   "comment_ids":[1, 2, 3]
 }

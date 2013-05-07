@@ -19,11 +19,13 @@ public class PostFaker {
     post.setId(id);
 
     if (id != null) {
-      post.setTitle("Post " + id);
-      post.setBody("Post " + id + " body");
+      post.setTitle("Title " + id);
+      post.setSummary("Summary " + id);
+      post.setBody("Body " + id);
     } else {
-      post.setTitle("Post ");
-      post.setBody("Post body");
+      post.setTitle("Title");
+      post.setSummary("Summary");
+      post.setBody("Body");
     }
 
     return post;

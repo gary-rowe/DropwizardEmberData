@@ -25,6 +25,9 @@ public class Post {
   private String title;
 
   @JsonProperty
+  private String summary;
+
+  @JsonProperty
   private String body;
 
   @JsonProperty
@@ -52,6 +55,14 @@ public class Post {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
   }
 
   public String getBody() {
