@@ -16,7 +16,7 @@ import java.util.List;
  */
 @JsonSnakeCase
 @JsonRootName("post")
-public class Post {
+public class Post implements Comparable<Post> {
 
   @JsonProperty
   private Long id;
@@ -71,5 +71,26 @@ public class Post {
 
   public void setBody(String body) {
     this.body = body;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Post post = (Post) o;
+
+    return !(id != null ? !id.equals(post.id) : post.id != null);
+
+  }
+
+  @Override
+  public int hashCode() {
+    return id != null ? id.hashCode() : 0;
+  }
+
+  @Override
+  public int compareTo(Post that) {
+    return this.getId().compareTo(that.getId());
   }
 }

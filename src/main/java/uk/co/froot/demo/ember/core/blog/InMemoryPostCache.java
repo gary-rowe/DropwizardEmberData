@@ -7,6 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import uk.co.froot.demo.ember.api.blog.Post;
 import uk.co.froot.demo.ember.api.blog.PostList;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -40,6 +41,8 @@ public class InMemoryPostCache {
       Post clone = clone(postEntry.getValue(), postEntry.getValue().getId());
       postList.getPosts().add(clone);
     }
+
+    Collections.sort(postList.getPosts());
 
     return postList;
   }
