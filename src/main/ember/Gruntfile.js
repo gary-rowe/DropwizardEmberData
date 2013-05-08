@@ -143,7 +143,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ember-templates');
 
   /*
-   A task to build the test runner html file that get place in
+   A task to build the test runner html file that get placed in
    /test so it will be picked up by the qunit task. Will
    place a single <script> tag into the body for every file passed to
    its coniguration above in the grunt.initConfig above.
