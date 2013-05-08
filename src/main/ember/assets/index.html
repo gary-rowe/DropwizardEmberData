@@ -36,11 +36,20 @@
       <a class="brand" href="#">Dropwizard Ember Data Blog</a>
 
       <div class="nav-collapse collapse">
-        <ul class="nav">
+        <ul class="nav nav-pills">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#write">Write</a></li>
           <li><a href="#about">About</a></li>
+          <li class="divider-vertical"></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">API<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/api/posts">All Posts</a></li>
+              <li><a href="/api/posts/1">Post 1</a></li>
+            </ul>
+          </li>
         </ul>
+
       </div>
       <!--/.nav-collapse -->
     </div>
@@ -49,23 +58,20 @@
 
 <div class="container">
 
-  <h1>Dropwizard Ember Data Blog</h1>
-
-  <p>Make sure you run this app from <a href="http://localhost:8080/index.html">localhost:8080</a>.</p>
-
-  <p>You can verify the JSON using these links:</p>
-  <ul>
-    <li><a href="/api/posts">All posts</a></li>
-    <li><a href="/api/posts/1">Posts 1 (preloaded)</a></li>
-    <li><a href="/api/posts/2">Posts 2 (preloaded)</a></li>
-  </ul>
   <!-- Ember demo code starts -->
 
-  <section id="dedd"></section>
+  <section id="dedd" ></section>
 
   <!-- Ember demo code ends -->
+
 </div>
-</body>
-<!-- All dependencies are merged into a single file -->
+<!-- /container -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+
+<!-- The order is important here -->
 <script type="text/javascript" src="/app/application.js"></script>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+
+</body>
 </html>

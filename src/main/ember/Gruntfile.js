@@ -44,7 +44,7 @@ module.exports = function (grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, src: ['assets/*'], dest: '../../../target/classes'}
+          {expand: true, src: ['assets/**/*'], dest: '../../../target/classes'}
         ]
       }
     },
