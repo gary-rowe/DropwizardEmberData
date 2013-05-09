@@ -1,1 +1,0 @@
-//App.PostsSelectedPostController = Ember.ObjectController.extend({});
