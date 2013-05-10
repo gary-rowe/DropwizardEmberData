@@ -77,17 +77,17 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="post">
+    <script type="text/x-handlebars" data-template-name="posts">
 
       <div class="row">
         <div class="span12">
           <div class="row">
             <div class="span6">
               <div>
-                {{#each post in controller.paginatedContent}}
-                <h3>{{post.title}}</h3>
+                {{#each posts in controller.paginatedContent}}
+                <h3>{{posts.title}}</h3>
 
-                <p>{{post.summary}}</p>
+                <p>{{posts.summary}}</p>
                 {{/each}}
               </div>
               <div class="pagination pagination-centered">
@@ -95,19 +95,15 @@
                    contentBinding maps to App.PostController.prevPage in PaginationMixin
                 -->
                 <ul>
-                  <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' firstPage target="controller"}}&laquo;&laquo;{{/linkTo}}</li>
-                -->
                   <li
-                  {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' prevPage
+                  {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'posts.page' prevPage
                   target="controller"}}&laquo;{{/linkTo}}</li>
                   {{#each pages}}
                   {{view App.PaginationView contentBinding="this" selectedPageBinding="controller.currentPage"}}
                   {{/each}}
                   <li
-                  {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'post.page' nextPage
+                  {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'posts.page' nextPage
                   target="controller"}}&raquo;{{/linkTo}}</li>
-                  <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' availablePages target="controller"}}&raquo;&raquo;{{/linkTo}}</li>
-                -->
                 </ul>
               </div>
             </div>
@@ -120,7 +116,7 @@
     <script type="text/x-handlebars" data-template-name="pagination">
 
       {{#with view}}
-      {{#linkTo 'post.page' page}}
+      {{#linkTo 'posts.page' page}}
       {{content.page_id}}
       {{/linkTo}}
       {{/with}}

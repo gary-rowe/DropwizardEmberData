@@ -15,12 +15,12 @@ App.Store = DS.Store.extend({
 
 // Routes
 App.Router.map(function (match) {
-  this.resource("post", { path:"/" }, function () {
+  this.resource("posts", { path:"/" }, function () {
     this.route("page", { path:"/page/:page_id" });
   });
 });
 
-App.PostPageRoute = Ember.Route.extend({
+App.PostsPageRoute = Ember.Route.extend({
   model:function (params) {
     // Create a model containing just the page ID
     return Ember.Object.create({id:params.page_id});
@@ -28,13 +28,13 @@ App.PostPageRoute = Ember.Route.extend({
   setupController:function (controller, model) {
     // Find the PostController and set its selected page to the page ID
     // This is used by the PaginationMixin
-    this.controllerFor('post').set('selectedPage', model.get('id'));
+    this.controllerFor('posts').set('selectedPage', model.get('id'));
   }
 });
 
-App.PostRoute = Ember.Route.extend({
+App.PostsRoute = Ember.Route.extend({
   model:function (params) {
-    this.controllerFor('post').set('selectedPage', 1);
+    this.controllerFor('posts').set('selectedPage', 1);
     return App.Post.find();
   }
 });
@@ -76,10 +76,7 @@ App.PaginationView = Ember.View.extend({
 // Controllers
 // Extends the PaginationMixin which provides standard methods for
 // page navigation for use by the views
-App.PostController = Ember.ArrayController.extend(Ember.PaginationMixin, {
-  itemsPerPage:5,
-  pagesPerControl:9
+App.PostsController = Ember.ArrayController.extend(Ember.PaginationMixin, {
+  itemsPerPage:3,
+  pagesPerControl:5
 });
-
-
-
