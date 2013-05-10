@@ -77,49 +77,40 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="application">
-
-      <div id="main">
-        {{ outlet }}
-      </div>
-
-    </script>
-
     <script type="text/x-handlebars" data-template-name="post">
 
       <div class="row">
         <div class="span12">
           <div class="row">
-            <div class="span12">
-              <table class="table table-striped table-bordered table-condensed">
-                <thead>
-                <th>Title</th>
-                <th>Summary</th>
-                </thead>
-                <tbody>
+            <div class="span6">
+              <div>
                 {{#each post in controller.paginatedContent}}
-                <tr>
-                  <td>{{post.title}}</td>
-                  <td>{{post.summary}}</td>
-                </tr>
+                <h3>{{post.title}}</h3>
+
+                <p>{{post.summary}}</p>
                 {{/each}}
-                </tbody>
-              </table>
+              </div>
+              <div class="pagination pagination-centered">
+                <!--
+                   contentBinding maps to App.PostController.prevPage in PaginationMixin
+                -->
+                <ul>
+                  <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' firstPage target="controller"}}&laquo;&laquo;{{/linkTo}}</li>
+                -->
+                  <li
+                  {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' prevPage
+                  target="controller"}}&laquo;{{/linkTo}}</li>
+                  {{#each pages}}
+                  {{view App.PaginationView contentBinding="this" selectedPageBinding="controller.currentPage"}}
+                  {{/each}}
+                  <li
+                  {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'post.page' nextPage
+                  target="controller"}}&raquo;{{/linkTo}}</li>
+                  <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' availablePages target="controller"}}&raquo;&raquo;{{/linkTo}}</li>
+                -->
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="pagination pagination-centered">
-            <!--
-               contentBinding maps to App.PostController.prevPage in PaginationMixin
-            -->
-            <ul>
-              <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' firstPage target="controller"}}&laquo;&laquo;{{/linkTo}}</li>-->
-              <li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' prevPage target="controller"}}&laquo;{{/linkTo}}</li>
-              {{#each pages}}
-              {{view App.PaginationView contentBinding="this" selectedPageBinding="controller.currentPage"}}
-              {{/each}}
-              <li {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'post.page' nextPage target="controller"}}&raquo;{{/linkTo}}</li>
-              <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' availablePages target="controller"}}&raquo;&raquo;{{/linkTo}}</li>-->
-            </ul>
           </div>
         </div>
       </div>
@@ -129,9 +120,9 @@
     <script type="text/x-handlebars" data-template-name="pagination">
 
       {{#with view}}
-        {{#linkTo 'post.page' page}}
-        {{content.page_id}}
-        {{/linkTo}}
+      {{#linkTo 'post.page' page}}
+      {{content.page_id}}
+      {{/linkTo}}
       {{/with}}
 
     </script>
