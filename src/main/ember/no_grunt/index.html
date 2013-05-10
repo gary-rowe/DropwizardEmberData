@@ -107,14 +107,19 @@
               </table>
             </div>
           </div>
-          <div class="row">
-            <div name="prev">{{#linkTo 'post.page' prevPage target="controller"}}Prev{{/linkTo}}</div>
-            <ul class="pagination gui-text">
-              {{#each posts}}
-              {{view App.PaginationView contentBinding="this"}}
+          <div class="pagination pagination-centered">
+            <!--
+               contentBinding maps to App.PostController.prevPage in PaginationMixin
+            -->
+            <ul>
+              <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' firstPage target="controller"}}&laquo;&laquo;{{/linkTo}}</li>-->
+              <li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' prevPage target="controller"}}&laquo;{{/linkTo}}</li>
+              {{#each pages}}
+              {{view App.PaginationView contentBinding="this" selectedPageBinding="controller.currentPage"}}
               {{/each}}
+              <li {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'post.page' nextPage target="controller"}}&raquo;{{/linkTo}}</li>
+              <!--<li {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'post.page' availablePages target="controller"}}&raquo;&raquo;{{/linkTo}}</li>-->
             </ul>
-            <div name="next">{{#linkTo 'post.page' nextPage target="controller"}}Next{{/linkTo}}</div>
           </div>
         </div>
       </div>
@@ -124,9 +129,9 @@
     <script type="text/x-handlebars" data-template-name="pagination">
 
       {{#with view}}
-      {{#linkTo 'post.page' page}}
-      {{content.page_id}}
-      {{/linkTo}}
+        {{#linkTo 'post.page' page}}
+        {{content.page_id}}
+        {{/linkTo}}
       {{/with}}
 
     </script>
