@@ -15,12 +15,29 @@ App.Store = DS.Store.extend({
 
 // Routes
 App.Router.map(function (match) {
-  this.resource("posts", { path:"/" }, function () {
-    this.route("page", { path:"/page/:page_id" });
+  this.route("index", {path: "/"}); // IndexController -> "/" via a generated "App.IndexRoute"
+
+  this.resource("posts", { path:"/posts" }, function () {   // PostsController -> "/posts" via "PostsRoute"
+    this.route("selectedPage", { path:"/page/:page_id" }); // PostsSelectedPageController -> "/posts/page/{id}"
+    this.route("selectedPost", { path:"/post/:post_id" }); // PostsSelectedPostController -> "/posts/post/{id}"
   });
 });
 
-App.PostsPageRoute = Ember.Route.extend({
+// Override the generated App.IndexRoute with this one
+App.IndexRoute = Ember.Route.extend({
+    redirect: function() {
+        this.transitionTo("posts"); // Make this route redirect to the named "posts" resource
+    }
+});
+
+App.PostsRoute = Ember.Route.extend({
+  model:function (params) {
+    this.controllerFor('posts').set('selectedPage', 1);
+    return App.Post.find();
+  }
+});
+
+App.PostsSelectedPageRoute = Ember.Route.extend({
   model:function (params) {
     // Create a model containing just the page ID
     return Ember.Object.create({id:params.page_id});
@@ -32,10 +49,9 @@ App.PostsPageRoute = Ember.Route.extend({
   }
 });
 
-App.PostsRoute = Ember.Route.extend({
-  model:function (params) {
-    this.controllerFor('posts').set('selectedPage', 1);
-    return App.Post.find();
+App.PostsSelectedPostRoute = Ember.Route.extend({
+  model: function(params) {
+    return App.Post.find(params.post_id); // Returns a specific Post by ID
   }
 });
 
@@ -77,6 +93,11 @@ App.PaginationView = Ember.View.extend({
 // Extends the PaginationMixin which provides standard methods for
 // page navigation for use by the views
 App.PostsController = Ember.ArrayController.extend(Ember.PaginationMixin, {
+  itemsPerPage:3,
+  pagesPerControl:5
+});
+
+App.SelectedPostController = Ember.ArrayController.extend(Ember.PaginationMixin, {
   itemsPerPage:3,
   pagesPerControl:5
 });

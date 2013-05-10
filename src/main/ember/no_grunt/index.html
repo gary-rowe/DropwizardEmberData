@@ -67,16 +67,6 @@
       {{outlet}}
     </script>
 
-    <script type="text/x-handlebars" data-template-name="posts/selectedPost">
-      <div id="selectedPost">
-        <h1>{{title}}</h1>
-
-        <p>{{summary}}</p>
-
-        <p>{{body}}</p>
-      </div>
-    </script>
-
     <script type="text/x-handlebars" data-template-name="posts">
 
       <div class="row">
@@ -84,10 +74,10 @@
           <div class="row">
             <div class="span6">
               <div>
-                {{#each posts in controller.paginatedContent}}
-                <h3>{{posts.title}}</h3>
+                {{#each post in controller.paginatedContent}}
+                <h3>{{#linkTo 'posts.selectedPost' post}}{{post.title}}{{/linkTo}}</h3>
 
-                <p>{{posts.summary}}</p>
+                <p>{{post.summary}}</p>
                 {{/each}}
               </div>
               <div class="pagination pagination-centered">
@@ -96,16 +86,19 @@
                 -->
                 <ul>
                   <li
-                  {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'posts.page' prevPage
+                  {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'posts.selectedPage' prevPage
                   target="controller"}}&laquo;{{/linkTo}}</li>
                   {{#each pages}}
                   {{view App.PaginationView contentBinding="this" selectedPageBinding="controller.currentPage"}}
                   {{/each}}
                   <li
-                  {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'posts.page' nextPage
+                  {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'posts.selectedPage' nextPage
                   target="controller"}}&raquo;{{/linkTo}}</li>
                 </ul>
               </div>
+            </div>
+            <div class="span6">
+              {{outlet}}
             </div>
           </div>
         </div>
@@ -116,11 +109,21 @@
     <script type="text/x-handlebars" data-template-name="pagination">
 
       {{#with view}}
-      {{#linkTo 'posts.page' page}}
+      {{#linkTo 'posts.selectedPage' page}}
       {{content.page_id}}
       {{/linkTo}}
       {{/with}}
 
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="posts/selectedPost">
+      <div id="selectedPost">
+        <h1>{{title}}</h1>
+
+        <p>{{summary}}</p>
+
+        <p>{{body}}</p>
+      </div>
     </script>
 
   </section>
