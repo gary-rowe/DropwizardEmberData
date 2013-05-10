@@ -14,7 +14,7 @@ import java.util.List;
  * </ul>
  */
 @JsonSnakeCase
-@JsonRootName("post_list")
+@JsonRootName("posts")
 public class PostList {
 
   // TODO Add pagination support

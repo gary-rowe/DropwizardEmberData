@@ -83,6 +83,7 @@ public class PostResource extends BaseResource {
   public PostList findAll() {
 
     return service.all();
+
   }
 
   /**

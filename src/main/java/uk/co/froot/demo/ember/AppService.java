@@ -57,6 +57,7 @@ public class AppService extends Service<AppConfiguration> {
   public void run(AppConfiguration configuration, Environment environment) throws Exception {
 
     // Add any specialised configuration here
+
   }
 
 }
