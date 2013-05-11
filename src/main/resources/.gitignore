@@ -1,2 +1,5 @@
 # Ember ignores
-# app/application.js
+assets/app.js
+assets/index.html
+assets/ember
+assets/jquery

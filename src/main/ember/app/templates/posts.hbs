@@ -1,37 +1,40 @@
 <div class="row">
   <div class="span12">
     <div class="row">
-      <div class="span12">
-        <table class="table table-striped table-bordered table-condensed">
-          <thead>
-          <th>Title</th>
-          <th>Summary</th>
-          </thead>
-          <tbody>
-            {{#each post in controller.paginatedContent}}
-            <tr>
-              <td>{{post.title}}</td>
-              <td>{{post.summary}}</td>
-            </tr>
+      <div class="span6">
+
+        <div>
+          {{#each post in controller.paginatedContent}}
+            <h3>{{#linkTo 'posts.selectedPost' post}}{{post.title}}{{/linkTo}}</h3>
+
+            <p>{{post.summary}}</p>
+          {{/each}}
+        </div>
+
+        <div class="pagination pagination-centered">
+          <!--
+             contentBinding maps to App.PostController.prevPage in PaginationMixin
+          -->
+          <ul>
+            <li
+              {{bindAttr class="controller.disablePrev:disabled"}}>{{#linkTo 'posts.selectedPage' prevPage
+            target="controller"}}&laquo;{{/linkTo}}</li>
+            {{#each pages}}
+
+              {{view App.PaginationView contentBinding="this" selectedPageBinding="controller.currentPage"}}
+
             {{/each}}
-          </tbody>
-        </table>
+            <li
+              {{bindAttr class="controller.disableNext:disabled"}}>{{#linkTo 'posts.selectedPage' nextPage
+            target="controller"}}&raquo;{{/linkTo}}</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="span6">
+        <!-- Present the output from the post selection -->
+        {{outlet}}
       </div>
     </div>
-    <div class="row">
-      <div name="prev">{{#linkTo 'post.page' prevPage target="controller"}}Prev{{/linkTo}}</div>
-      <ul class="pagination gui-text">
-        {{#each posts}}
-          {{view App.PaginationView contentBinding="this"}}
-        {{/each}}
-      </ul>
-      <div name="next">{{#linkTo 'post.page' nextPage target="controller"}}Next{{/linkTo}}</div>
-    </div>
   </div>
-</div>
-
-
-<div>
-  <p>Selected Post</p>
-  {{outlet}}
 </div>
