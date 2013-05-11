@@ -21,10 +21,10 @@ require('dependencies/jquery/jquery');
  * handlebars-runtime microlib instead of the
  * entire handlebars library and its string parsing functions.
  */
-require('dependencies/ember/handlebars-1.0.0-rc.3');
+require('dependencies/ember/handlebars');
 
 /* Ember for client side MVC */
-require('dependencies/ember/ember-1.0.0-rc.3');
+require('dependencies/ember/ember');
 
 /* Ember Data for automatic persistence to a REST API */
 require('dependencies/ember/ember-data');
@@ -54,6 +54,12 @@ App.Store = DS.Store.extend({
 });
 
 /*
+ * Mixins
+ * Provides extra functionality not found in the core libraries
+ */
+require('app/mixins/pagination');
+
+/*
  * Model layer.
  * Ember.Object itself provides most of what
  * model layers elsewhere provide. Since TodoMVC
@@ -70,6 +76,7 @@ require('app/models/post');
  * programming to do.
  */
 require('app/views/post');
+require('app/views/pagination');
 
 /*
  * Controller layer.
@@ -88,8 +95,3 @@ require('app/controllers/post');
  */
 require('app/routes/router');
 
-/*
- * Mixins
- * Provides extra functionality not found in the core libraries
- */
-require('app/mixins/pagination');
