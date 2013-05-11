@@ -9,6 +9,8 @@ in both serving the JavaScript application and handling the REST queries that su
 It will demonstrate a simple blog with posts and comments. These are held in a simple in-memory cache. All data is
 served through a simple REST API that adheres to the requirements of the [Ember Data RESTAdapter](http://emberjs.com/guides/models/the-rest-adapter/).
 
+I recommend that you [read the associated blog article](http://gary-rowe.com/agilestack/2013/05/11/dropwizard-with-ember-data/) if you want to really understand how this all works. Ember is not for the faint-hearted.
+
 It uses the following libraries:
 
 # Client side
@@ -117,21 +119,14 @@ Working Directory: src/main/ember
 Path to Node App JS File: /usr/local/share/npm/bin/grunt
 ```
 
-## View the app (no backend)
-
-If you just want to run up the front end without any Dropwizard RESTful API provision (perhaps for simple CSS layout
-work) simply do the Grunt work as described earlier and then open the file `src/main/ember/build/index.html`. As changes
-are made to the application Grunt will automatically regenerate the appropriate supporting files so that you can keep a
-good flow going.
-
-## View the app (with Dropwizard)
+## View the app with Dropwizard
 
 If you want to use Dropwizard to provide a backend then simply run up `AppService.main()` as normal then run the
 Grunt process as a second runtime configuration (you'll have both Java and Grunt chugging away).
 
 # What am I seeing?
 
-If you see the text "This is the post you're looking for!" then you're in business.
+If you see a bunch of blog posts made up of Lorem Ipsum then you're in business.
 
 # Nope not seeing that...
 
@@ -141,13 +136,16 @@ You'll need to do some debugging.
 * Don't go changing the `src/main/ember/dependencies/ember*.js` files - compatibility in the release candidates is fraught with hazard
 * Check the JavaScript console in your browser. Chrome and Firefox have comprehensive debugging tools.
 
+As a last resort you can switch to the "No Grunt" version by copying files out of `src/main/ember/no_grunt` to `src/main/resources/assets`
+and then adding in the JavaScript libraries from `src/main/ember/dependencies` (not `compiled`) and then seeing if it serves `index.html`.
+
 # Yay! I'm in business! What's going on?
 
 Let's work it back from the front end to the server
 
 1. The file `index.html` got loaded and a bunch of scripts were initialized
 2. The section script with `data-template-name="application"` is the HTML output for the Ember application
-3. The section script with `data-template-name="index"` is the HTML template for the post
+3. The section script with `data-template-name="posts"` is the HTML template for the post list
 
 # OK, and where's the JavaScript?
 
@@ -156,13 +154,13 @@ All the magic happens in `app.js` take a look at the comments and you'll see how
 1. The application will log to the browser console
 2. There is a model called Post with a `title` and `body` linked to a data store
 3. There is a simple route that only gets the Post with id=1 (the path `posts` is implied through Ember naming conventions)
-4. The `RESTAdapter` is configured to create URL paths using the template `/api/posts/{id}.json` which makes the simulated RESTful API easier
+4. The `RESTAdapter` is configured to create URL paths using the template `/api/posts/{id}` which makes the simulated RESTful API easier
 5. The data store uses Ember Data revision 12 and references the `RESTAdapter`
 
 # Well that was easy! What next?
 
 For a much bigger scale application involving a [Maven](http://maven.apache.org)-built [Dropwizard](http://dropwizard.codahale.com) back end combined
-with a [Grunt.js](http://gruntjs.com)-built front end see my other public repos (TODO).
+with a [Grunt.js](http://gruntjs.com)-built front end see my other public repos (they're on my to do list).
 
 # Where does the ASCII art for the banner come from?
 
